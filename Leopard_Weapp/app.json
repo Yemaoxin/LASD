@@ -1,0 +1,32 @@
+{
+  "pages": [
+    "pages/state/state",
+    "pages/index/index",
+    "pages/appointment/appoint",
+    "pages/info/info"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Leopard 图书馆预约",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/state/state",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/appointment/appoint",
+        "text": "预约"
+      },
+      {
+        "pagePath": "pages/info/info",
+        "text": "我的"
+      }
+    ]
+  }
+}

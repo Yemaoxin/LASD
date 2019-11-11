@@ -1,0 +1,3 @@
+<!--pages/appointment/appoint.wxml-->
+<text>预约界面</text>
+<!-- 预约界面,通过此处进行定时预约各大场馆的座位 -->

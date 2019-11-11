@@ -1,0 +1,3 @@
+<!--pages/state/state.wxml-->
+<text>首页</text>
+<!-- 当前的座位情况，取消预约和离开座位等选项 -->
