@@ -46,3 +46,33 @@
 
 ##### 2.3 当需要修改applications.properties等全局文件时，须向全体说明
 
+
+
+### 3.SpringBoot开发
+
+​         这个可以实际项目实战的例子。会的同学就直接用就好了
+
+​         项目构建基于gradle
+
+​         各自构建自己的Controller路由。
+
+### 4.微信小程序开发
+
+##### 4.1 开发参考
+
+   基于原生微信小程序，不使用Wepy等框架，节省学习成本。
+
+   参看微信小程序官网<https://developers.weixin.qq.com/miniprogram/dev/framework/>
+
+   有遇到大问题时，参看对应的指南即可，或者在群里问。
+
+##### 4.2使用组件
+
+ 基于IView-Weapp、Vants-Weapp这两种组件库，实际只需要把一个个组件添加好，界面不难。
+
+主要是js异步通信后端的问题。
+
+参考界面组件:<https://youzan.github.io/vant-weapp/#/intro>
+
+<https://weapp.iviewui.com/docs/guide/start>
+
