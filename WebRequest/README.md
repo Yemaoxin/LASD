@@ -10,7 +10,7 @@
 
 只需要**模拟登录链接并请求**即可，不需要提交表单，不需要处理验证码。
 
-例: https://seat.lib.whu.edu.cn:8443/rest/auth?username=**2017301200273**&password=**111111**
+例: https://seat.lib.whu.edu.cn:8443/rest/auth?username=**2017301200273**&**password=111111**
 
 因为url的设置中''**?**""前为路径,**?**后为参数设置,**&**用于表示参数的并列.
 
