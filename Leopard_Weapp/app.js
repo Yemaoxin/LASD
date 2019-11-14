@@ -1,11 +1,16 @@
 //app.js
 App({
   onLaunch: function () {
-    // 展示本地存储能力
+    // =========     onLaunch  获取缓存的数据，若本地无缓存   =========
+   //  无缓存将page转移到登录页(index)
+    // 有缓存将跳转至首页(state)
     var logs = wx.getStorageSync('logs') || []
+    var account=wx.getStorageSync('account')||""           //学校图书馆的学号
+    var password=wx.getStorageSync('password')||""         //图书馆登录的密码
+
+    // 展示本地存储能力
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
     // 登录
     wx.login({
       success: res => {
@@ -32,6 +37,16 @@ App({
         }
       }
     })
+
+    //在其他launch逻辑结束后
+    if(account==""||password=="")
+    {
+       wx.redirectTo({
+         url:"pages/index/index"
+       });
+    }      
+    //默认前往首页
+    
   },
   globalData: {
     userInfo: null
