@@ -46,6 +46,15 @@ App({
        });
     }      
     //默认前往首页
+    //同时在有学号、密码的时候，直接获取token
+    wx.request({
+      url:"https://www.baidu.com",
+      method:"GET",
+      success(res) {
+        console.warn(res.data)
+      }
+    });
+
     
   },
   globalData: {
