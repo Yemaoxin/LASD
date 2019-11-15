@@ -707,8 +707,32 @@ Request:  http://seat.lib.whu.edu.cn/rest/v2/freeBook?    **token=J8PM1O4QZN1112
 "code": "0"
 }
 ```
+#### 五、解决小程序Referer Header的防盗链限制
 
+由于微信小程序、QQ小程序等小程序中，request请求头的Referer是 默认微信/qq指定的内容，导致在访问图书馆服务器的时候，无法通过。
 
+解决思路：通过自己服务器转发链接内容。
+
+自己服务器不做解析，直接将内容转发回小程序。
+
+具体解决方案：
+1. 编写抓包文件说明的url，按照访问图书馆的服务器来书写拼接url
+2. 通过小程序的wx.request向我的服务器45.40.201.185发起请求
+3. 接收请求的网络地址为http://45.40.201.185:8080/WHU/forward(暂时未提供https证书服务)
+4. 由于url为参数时可能包含“&”导致链接参数提取缺失，所以url应通过post方式作为数据发送到上述端口
+5. 例子：
+```
+wx.request({
+ url:"http://45.40.201.185:8080/WHU/forward",
+ data:{
+   "url":"https://seat.lib.whu.edu.cn:8443/rest/auth?username=2017301200273&password=111111"
+ },
+ success(res):{
+ //此处还应该有相应的处理逻辑，暂时通用只打印
+ console.info(res);
+ }
+})
+```
 
 #### 六、快速预约
 
