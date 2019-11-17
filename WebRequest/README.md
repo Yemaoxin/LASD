@@ -476,7 +476,11 @@ Request：https://seat.lib.whu.edu.cn:8443/rest/v2/free/filters&token=CQZE5BWJFM
 
    要求提供开始时间、结束时间（要求半小时为间隔）
 
-   Request：https://seat.lib.whu.edu.cn:8443/rest/v2/searchSeats/  **2019-11-12/570/1320**?token=CQZE5BWJFM11125527&**t**=1&**roomId**=15&**buildingId**=1&**batch**=9999&**page**=1&**t2**=2
+   Request：https://seat.lib.whu.edu.cn:8443/rest/v2/searchSeats/  **2019-11-12/570/1320**  
+   
+   method:**POST**,必须使用POST，因此服务器端也必须更改为POST方式不能用get请求  
+   
+   data参数：token=CQZE5BWJFM11125527&**t**=1&**roomId**=15&**buildingId**=1&**batch**=9999&**page**=1&**t2**=2
 
 ​        后面三个数据2019-11-12代表日期，570代表从0点开始到用户输入的开始时间的分钟数(30的倍数)
 
