@@ -1,0 +1,98 @@
+<!--pages/state/state.wxml-->
+<text>我的</text>
+<!-- 当前的座位情况，取消预约和离开座位等选项 -->
+
+<i-panel  >
+<view style="padding: 35px;" >    
+<view class="layout_horizontal">
+<view class="userinfo-avatar1">
+<open-data  type="userAvatarUrl"></open-data>
+<!-- <open-data type="userNickName"></open-data> -->
+</view>
+<!-- <open-data type="userNickName"></open-data> -->
+
+<i-button type="primary" bind:click="handleClick">
+<open-data type="userNickName"></open-data>
+</i-button> 
+</view>
+<!-- <view class="distance">
+<i-button type="primary" bind:click="handleClick">
+{{username}} {{userid}}
+</i-button> 
+</view> -->
+</view>
+</i-panel>
+
+<i-panel >
+    <view style="padding: 15px;"class="blue">
+          <text class="white">
+            您的名字 学号
+            {{username}} {{userid}}
+          </text>
+      
+    </view>
+</i-panel>
+
+
+
+<i-panel  >
+    <view style="padding: 15px;" class="blue">
+    <i-icon type="activity" size="28" color="#fff" />
+    <text class="white">您上次登录时间</text>
+    <text class="white">
+{{lastlogin}}
+</text>
+    </view>
+</i-panel>
+
+<i-panel  >
+<view style="padding: 15px;" class="blue">
+<i-icon type="activity" size="28" color="#fff" />
+<text class="white">您的违约记录次数</text>
+<text class="white">
+{{violate}}
+</text>
+    </view>
+</i-panel>
+
+<i-panel >
+    <view style="padding: 15px;" class="blue">
+    <i-icon type="activity" size="28" color="#fff" />
+<text class="white">您目前的预约状态</text>
+<text class="white">
+{{reservationstatus}}
+</text>
+
+    </view>
+</i-panel>
+
+<i-panel >
+<view style="padding: 15px;" class="blue">
+<i-icon type="activity" size="28" color="#fff" />
+<text class="white">您前1次预约的座位</text>
+<text class="white">
+{{location1}}
+</text>
+
+    </view>
+</i-panel>
+
+
+<!-- <i-icon size="35" type="addressbook_fill" />
+<text class="text2">切换用户</text> -->
+<view class="flex-row" style="display: block;">
+
+ 
+  <view class="flex-view-item">
+
+  </view>
+</view>
+<i-cell-group>
+<i-cell title="点击切换用户" is-link url="/pages/index/index">
+<!-- <i-icon size="35" type="addressbook_fill" /> -->
+<!-- <text class="text2">切换用户</text> -->
+</i-cell>
+ 
+</i-cell-group>
+
+
