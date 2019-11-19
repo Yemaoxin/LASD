@@ -1,0 +1,126 @@
+/* pages/state/state.wxss */
+.white
+{
+    color:#fff
+}
+
+
+
+.distance
+{
+  width: 10rpx;  
+  height: 100rpx;  
+  margin: 188rpx;  
+  margin-top: 30rpx; 
+}
+.blue
+{
+  background-color:#0000ff
+}
+
+.text
+{
+  font-size:1.6em;
+  color:#0000ff;
+  text-align:center;
+}
+.text1
+{
+  font-size:1.6em;
+  color:#ff0000;
+  text-align:center;
+}
+.text2
+{
+  font-size:1.6em;
+  color:#00ff00;
+  text-align:center;
+}
+.userinfo {  
+  position: relative;  
+  width: 750rpx;  
+  height: 320rpx;  
+  color: #fff;  
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+}  
+  
+.userinfo-avatar {  
+  overflow:hidden;  
+  display: block;  
+  width: 160rpx;  
+  height: 160rpx;  
+  margin: 20rpx;  
+  margin-top: 50rpx;  
+  border-radius: 50%;  
+  border: 2px solid #fff;  
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);  
+}  
+.userinfo-avatar1
+{
+  overflow:hidden;
+  display:block;
+  width:160rpx;
+  height:150rpx;
+  margin:10rpx;
+  margin-top:5rpx;
+  border-radius:50%;
+  border:2px solid #00ff00
+}
+  
+.userinfo{  
+  /* color: #fff; */  
+  font-size: 14px;  
+  background-color: #0000ff;  
+  border-radius:40%;  
+}  
+.avatar{
+  border-radius: 50%;
+  width:200rpx;
+  height:200rpx;
+  margin-top:100rpx;
+  text-align:center;
+  /* margin: 20rpx; */
+}
+.motto
+{
+  margin-top:100rpx;
+  font-size:32rpx;
+  font-weight:bold;
+  color:#9F4311;
+}
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+
+.layout_horizontal{
+  height: 100rpx;
+  display: flex;
+  /*row 横向  column 列表  */
+  flex-direction: row;
+}
+
+   
+
+
+
