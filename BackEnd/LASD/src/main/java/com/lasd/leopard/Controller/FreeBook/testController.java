@@ -1,4 +1,4 @@
-package com.lasd.leopard.Controller;
+package com.lasd.leopard.Controller.FreeBook;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

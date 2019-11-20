@@ -1,3 +1,44 @@
 <!--pages/appointment/appoint.wxml-->
-<text>预约界面</text>
+<!--<text>预约界面</text>-->
 <!-- 预约界面,通过此处进行定时预约各大场馆的座位 -->
+<!-- created by JH  2019/11/15 -->
+<view >
+<van-cell title="预约" value="" label="后台自动完成，释放前端" />
+
+<block custom-class="white" title="场馆" padding>
+    <van-row>
+        <van-col span="24" style="text-align: center" >日期</van-col>
+    </van-row>
+    <van-dropdown-menu active-color="#ee0a24">
+        <van-dropdown-item value="{{ date }}"  options="{{ dateOptions }}" bind:change="changeDate"/>
+    </van-dropdown-menu>
+    <van-row>
+        <van-col span="12" style="text-align: center" >场馆</van-col>
+        <van-col span="12" style="text-align: center" >房间</van-col>
+    </van-row>
+<van-dropdown-menu active-color="#ee0a24">
+    <van-dropdown-item value="{{ value_b }}"  options="{{ buildings_p }}" bind:change="changeBuildings"/>
+    <van-dropdown-item id="rooms_menu" value="{{ value_r }}" options="{{ rooms_p }}" bind:change="changeRoom" />
+</van-dropdown-menu>
+    <van-row>
+        <van-col span="12" style="text-align: center" >开始时间</van-col>
+        <van-col span="12" style="text-align: center" >结束时间</van-col>
+    </van-row>
+<van-dropdown-menu active-color="#ee0a24">
+        <van-dropdown-item value="{{ value_start }}"  options="{{ startTime }}" bind:change="changeStartTime" bind:change="changeStartTime"/>
+        <van-dropdown-item  value="{{ value_end }}" options="{{ endTime }}" bind:change="changeEndTime"/>
+</van-dropdown-menu>
+    <van-row gutter="200">
+        <van-col span="6" style="text-align: center" >  <van-button round type="info" bind:tap="searchSeats" size="small">搜索可用位置</van-button></van-col>
+        <van-col span="6" style="text-align: center" ><van-button round type="info" bind:tap="submit" >确认预约</van-button></van-col>
+    </van-row>
+
+
+    <van-row>
+        <van-col span="24" style="text-align: center" >位置</van-col>
+    </van-row>
+    <van-dropdown-menu active-color="#ee0a24">
+        <van-dropdown-item value="{{ seatId }}"  options="{{ seats }}" bind:change="changeSeat"/>
+    </van-dropdown-menu>
+</block>
+</view>
