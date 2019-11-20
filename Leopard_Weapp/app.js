@@ -8,6 +8,13 @@ App({
     var account=wx.getStorageSync('account')||"2017301200273"           //学校图书馆的学号
     var password=wx.getStorageSync('password')||"227114"         //图书馆登录的密码
 
+
+    /**
+     * TODO 仅做测试是使用
+     * */
+    wx.setStorageSync("account",account);
+    wx.setStorageSync("password",password);
+
     // 展示本地存储能力
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
@@ -45,19 +52,6 @@ App({
          url:"pages/index/index"
        });
     }      
-    //默认前往首页
-    //同时在有学号、密码的时候，直接获取token，通过设置的服务器端口访问
-    wx.request({
-      url:"https://www.quickbook11.cn:8080/WHU/forward",
-      data:{
-        "url":"https://seat.lib.whu.edu.cn:8443/rest/auth?username=2017301200273&password=227114"
-      },
-      method:"GET",
-      success(res) {
-        console.info(res.data.data.token);                        //用于打印测试
-        wx.setStorageSync("token",res.data.data.token);      //保存token
-      }
-    });
 
     
   },

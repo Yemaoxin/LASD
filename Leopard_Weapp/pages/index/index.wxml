@@ -1,4 +1,4 @@
-<!--index.wxml:登录界面,初次的登录界面-->
+<!--pages/login/login.wxml-->
 <view class="container">
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
@@ -7,7 +7,33 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+
+  <view class="login-from">
+    <form bindsubmit="formSubmit" class='form'>
+
+      <view class="username">
+        <view class="weui-cell weui-cell_input">
+          <image class="nameImage" src="/images/username.png"></image>
+          <view class="weui-cell__bd">
+            <input class="weui-input" name="no" bindinput="noinput" value='{{no}}' placeholder="请输入学号" />
+          </view>
+        </view>
+      </view>
+
+      <view class="password">
+        <view class="weui-cell weui-cell_input">
+          <image class="nameImage" src="/images/password.png"></image>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="password" name="pwd" bindinput="pwdinput" placeholder="请输入密码" value='{{pwd}}'/>
+          </view>
+        </view>
+      </view>
+
+
+      <view class="loginBtnView">
+        <button class="loginBtn" size="{{primarySize}}"  form-type='submit' disabled='{{disabled}}'>登录</button>
+      </view>
+    </form>
+
   </view>
 </view>
