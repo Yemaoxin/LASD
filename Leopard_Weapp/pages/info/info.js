@@ -34,7 +34,7 @@ Page({
   getdata: function () {
     var that = this;
     wx.request({
-      url: "http://45.40.201.185:8080/WHU/forward",
+      url: "https://www.quickbook11.cn:8080/WHU/forward",
       data: {
         // "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/user?token=FQIRRP6U5F11191953"
         "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/user?token"+token
@@ -63,7 +63,7 @@ Page({
       }
     })
     wx.request({
-      url: "http://45.40.201.185:8080/WHU/forward",
+      url: "https://www.quickbook11.cn:8080/WHU/forward",
       data: {
         // "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/history/1/50?token=FQIRRP6U5F11191953"
         "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/history/1/50?token="+token
