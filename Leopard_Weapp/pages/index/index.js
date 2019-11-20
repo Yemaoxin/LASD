@@ -31,7 +31,7 @@ Page({
     wx.showLoading({ title: '登录中...', })
     this.setData({ disabled: true });
     wx.request({
-      url: "http://45.40.201.185:8080/WHU/forward",
+      url: "https://www.quickbook11.cn:8080/WHU/forward",
       data: {
         "url":"https://seat.lib.whu.edu.cn:8443/rest/auth?username=2017302290020&password=111111"
       },

@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/state/state",
     "pages/index/index",
+    "pages/state/state",
+
     "pages/appointment/appoint",
     "pages/info/info"
   ],
