@@ -1,3 +1,13 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "van-dropdown-menu": "../../dist_diy/dropdown-menu/index",
+    "van-dropdown-item": "../../dist_diy/dropdown-item/index",
+    "van-cell": "../../dist_diy/cell/index",
+    "van-cell-group": "../../dist_diy/cell-group/index",
+    "van-tag": "../../dist_diy/tag/index",
+    "van-row": "../../dist_diy/row/index",
+    "van-col": "../../dist_diy/col/index",
+      "van-button": "../../dist_diy/button/index"
+
+  }
 }
