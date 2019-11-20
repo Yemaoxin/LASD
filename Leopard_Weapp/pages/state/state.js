@@ -5,8 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    account: wx.getStorageSync('account') || "",
-    token: wx.getStorageSync('token') || "",
+    account: wx.getStorageSync('account') || "2017301200273",
     token_alert_visible: false,
     logout_visible: false,
     cancel_visible: false,
@@ -66,6 +65,7 @@ Page({
    * 取消预约
    */
   cancelReserve() {
+    var token=wx.getStorageSync("token");
     var that = this;
     if (this.data.locations == "暂无预约" || this.data.locations == "") {
       wx.showToast({
@@ -83,10 +83,10 @@ Page({
       }
       else {
         wx.request({
-          url: "http://45.40.201.185:8080/WHU/forward",
+          url: "https://www.quickbook11.cn:8080/WHU/forward",
           data: {
             // "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/user?token="+that.data.token,
-            "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/cancel/" + that.data.seatId + "?token=" + "E2NQLNH66O11164618",
+            "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/cancel/" + that.data.seatId + "?token=" + token,
           },
           success: function (message) {
             wx.showToast({
@@ -114,7 +114,7 @@ Page({
       });
     } else {
       wx.request({
-        url: "http://45.40.201.185:8080/WHU/forward",
+        url: "https://www.quickbook11.cn:8080/WHU/forward",
         data: {
           "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/stop?token=" + that.data.token
         },
@@ -138,23 +138,20 @@ Page({
    */
   refreshPage() {
     var that = this;
-
+    var token=wx.getStorageSync("token");
     // 请求当前用户信息
     wx.request({
-      url: "http://45.40.201.185:8080/WHU/forward",
+      url: "https://www.quickbook11.cn:8080/WHU/forward",
       data: {
-        // "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/user?token="+that.data.token,
-        "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/user?token=" + "E2NQLNH66O11164618",
+        "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/user?token=" + token,
       },
       method: 'GET',
       success: function (message) {
-        that.setData({ reser_data: message.data });
-        that.setData({ name: message.data.data.name });
-        that.setData({ account: message.data.data.username });
+        that.setData({ reser_data: message.data,name: message.data.data.name ,account: message.data.data.username });
         if (message.data.data.checkedIn == false) {
-          that.setData({ checkedIn: "未签到" });
+          setTimeout(()=>{that.setData({ checkedIn: "未签到" });},200);
         } else {
-          that.setData({ checkedIn: "已签到" });
+          setTimeout(()=>{that.setData({ checkedIn: "已签到" });},200);
         }
       },
       fail: function (message) {
@@ -164,14 +161,13 @@ Page({
 
     // 请求当前用户的预约信息
     wx.request({
-      url: "http://45.40.201.185:8080/WHU/forward",
+      url: "https://www.quickbook11.cn:8080/WHU/forward",
       data: {
         // "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/user/reservations?token="+that.data.token,
-        "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/user/reservations?token=" + "E2NQLNH66O11164618",
+        "url": "https://seat.lib.whu.edu.cn:8443/rest/v2/user/reservations?token=" + token,
       },
       method: 'GET',
       success: function (message) {
-        console.log(message.data);
         if (message.data.data == null) {
           that.setData({ locations: "暂无预约", onDate: "暂无日期信息", period: "暂无时间信息" });
         } else {
@@ -194,17 +190,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (this.data.token == "" || this.data.account == "") {
-      this.setData({ token_alert_visible: true });
-    }
-    this.refreshPage();
-    if (this.data.token != "")
-      wx.showToast({
-        title: '加载中...',
-        icon: 'loading',
-        duration: 6000
-      });
-  },
+    //能来到此处即说明已经有帐号了
+    var account=wx.getStorageSync("account");
+    var password=wx.getStorageSync("password");
+    var that=this;
+    //在此处获取token
+    wx.request({
+      url:"https://www.quickbook11.cn:8080/WHU/forward",
+      data:{
+        "url":"https://seat.lib.whu.edu.cn:8443/rest/auth?username="+account+"&password="+password
+      },
+      method:"GET",
+      success(res) {
+        wx.setStorageSync("token",res.data.data.token);      //保存token
+        that.refreshPage();             //页面刷新
+      }
+    });
+    },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

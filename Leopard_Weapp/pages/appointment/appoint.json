@@ -7,7 +7,8 @@
     "van-tag": "../../dist_diy/tag/index",
     "van-row": "../../dist_diy/row/index",
     "van-col": "../../dist_diy/col/index",
-      "van-button": "../../dist_diy/button/index"
-
+      "van-button": "../../dist_diy/button/index",
+    "i-button": "../../dist/button/index",
+    "van-image": "../../dist_diy/image/index"
   }
 }
