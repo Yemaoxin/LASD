@@ -48,11 +48,11 @@ token如下：
 
 **强调必须将token放在请求的header中**
 
-请求链接：https://seat.lib.whu.edu.cn:8443/rest/v2/free/filters
+请求链接：https://seat.lib.whu.edu.cn:8443/rest/v2/user
 
 1.**请求头header：token：K093FE4A5W11121807（例子）**
 
-2.**token放在**参数中，经多次验证放在参数中也可行。即请求链接为：https://seat.lib.whu.edu.cn:8443/rest/v2/free/filters?  **token=SYGD4XO6QX11120840**              (实际无空格)
+2.**token放在**参数中，经多次验证放在参数中也可行。即请求链接为：https://seat.lib.whu.edu.cn:8443/rest/v2/user?  **token=SYGD4XO6QX11120840**              (实际无空格)
 
 **推荐使用第二种。**
 
@@ -64,12 +64,12 @@ token如下：
 {
 	"status": "success",
 	"data": {
-		"id": 138911,                                         //用户的id，这个应该是一个比较特殊的暂时没看出来用处
+		"id": 138911,        //用户的id，这个应该是一个比较特殊的暂时没看出来用处
 		"enabled": true,                 
-		"name": "叶茂鑫",                                 // 用户名
+		"name": "叶茂鑫",                   // 用户名
 		"username": "2017301200273",       //学号
 		"username2": null,
-		"status": "NORMAL",                 
+		"status": "NORMAL",               //检测用户状态的变量，如果存在非法的多次请求，短时间内将被封禁使用权限，同时发现自习助手的一侧的数据仍然可以正常使用，考虑中期更换请求链接          
 		"lastLogin": "2019-11-12T14:29:42.000",                 
 		"checkedIn": false,
 		"reservationStatus": null,
@@ -94,7 +94,7 @@ token如下：
 
 首页使用的当前状态就是history列表的第一个项目。
 
-Request:https://seat.lib.whu.edu.cn:8443/rest/v2/history/1/50?token=SYGD4XO6QX11120840
+**Request**:https://seat.lib.whu.edu.cn:8443/rest/v2/history/1/50?token=SYGD4XO6QX11120840
 
 history后的1代表第一页，一般就只提供这么多，直接用此链接请求即可
 
@@ -191,7 +191,7 @@ Response：仅为部分的例子
 
    所以首页的直接调用此处即可。
 
-  Request：http://seat.lib.whu.edu.cn/rest/v2/user/  **reservations?token=CQZE5BWJFM11125527**
+  **Request**：http://seat.lib.whu.edu.cn/rest/v2/user/  **reservations?token=CQZE5BWJFM11125527**
 
 参数：token
 
@@ -224,17 +224,27 @@ Response：仅为部分的例子
 
 3. **取消当前座位预约**
 
-Request：http://seat.lib.whu.edu.cn/rest/v2/cancel/  **8046397**  ?token=CQZE5BWJFM11125527
+​      Request：http://seat.lib.whu.edu.cn/rest/v2/cancel/  **8046397**  ?token=CQZE5BWJFM11125527
 
-加黑部分就是该座位预约信息的订单号即id，详见2的数据中的**id**(为了突出而使用了空格，实际不可以有空格)
+​     **加黑部分就是该座位预约信息的订单号即id**，详见2的数据中的**id**(为了突出而使用了空格，实际不可以有空格)
+
+4. **结束使用**
+
+   Request：http://seat.lib.whu.edu.cn/rest/v2/stop?token=CQZE5BWJFM11125527
+
+   参数：token
+
+   结束当前座位的使用
 
 #### 四、预约座位
 
-Request：https://seat.lib.whu.edu.cn:8443/rest/v2/free/filters&token=CQZE5BWJFM11125527
-
-**强调使用token**
+  
 
 1.获取座位信息总体信息
+
+   Request：https://seat.lib.whu.edu.cn:8443/rest/v2/free/filters&token=CQZE5BWJFM11125527
+
+**强调使用token**
 
 使用该信息规划页面。让用户进行选择
 
@@ -477,24 +487,28 @@ Request：https://seat.lib.whu.edu.cn:8443/rest/v2/free/filters&token=CQZE5BWJFM
    要求提供开始时间、结束时间（要求半小时为间隔）
 
    Request：https://seat.lib.whu.edu.cn:8443/rest/v2/searchSeats/  **2019-11-12/570/1320**  
-   
+
    method:**POST**,必须使用POST，因此服务器端也必须更改为POST方式不能用get请求  
-   
+
    data参数：token=CQZE5BWJFM11125527&**t**=1&**roomId**=15&**buildingId**=1&**batch**=9999&**page**=1&**t2**=2
 
-​        后面三个数据2019-11-12代表日期，570代表从0点开始到用户输入的开始时间的分钟数(30的倍数)
+   ```
+    后面三个数据2019-11-12代表日期，570代表从0点开始到用户输入的开始时间的分钟数(30的倍数)
+   ```
 
 **加黑参数：日期，开始时间（分钟数 30倍数），结束时间（分钟数 30倍数）**，token
 
-​       1320代表用户输入的结束时间对应的从0时开始的分钟数。（结束时间不可以超过22：30）
+```
+   1320代表用户输入的结束时间对应的从0时开始的分钟数。（结束时间不可以超过22：30）
 
-​       必须严格按照此要求进行请求，另外一定要添加**token**
+   必须严格按照此要求进行请求，另外一定要添加**token**
 
-​      另外如果是**今天查看明天的座位情况**，所有位置都会出来，但是显示的状态是此刻的状态
+  另外如果是**今天查看明天的座位情况**，所有位置都会出来，但是显示的状态是此刻的状态
 
-​      也就是如果想看所有座位则请求时间换成第二天的即可。
+  也就是如果想看所有座位则请求时间换成第二天的即可。
 
-​      Response：
+Response：
+```
 
 ```
 //截取的部分
@@ -594,9 +608,9 @@ response：仅为一小部分，实际上好几万个元素，不列出了
 
 5. **预约某个位置**
 
-​      5.1 获取可用开始时间
+   5.1 获取可用开始时间
 
-​     Request：http://seat.lib.whu.edu.cn/rest/v2/startTimesForSeat/ **2508**/**2019-11-12**?token=J8PM1O4QZN11122226
+   Request：http://seat.lib.whu.edu.cn/rest/v2/startTimesForSeat/ **2508**/**2019-11-12**?token=J8PM1O4QZN11122226
 
    **加黑参数：座位的id  ，日期**  ，**token**
 
@@ -689,7 +703,11 @@ Request:  http://seat.lib.whu.edu.cn/rest/v2/endTimesForSeat/ **2778**/**2019-11
 
 5.3 预约(自由预约)
 
+//自习助手一侧是这样的
+
 Request:  http://seat.lib.whu.edu.cn/rest/v2/freeBook?    **token=J8PM1O4QZN11122226**&**startTime=1110**&**endTime=1320**&**seat=2778**&**date=2019-11-12**
+
+//抢座软件一侧是还需要**t=1&t2=2**的请求参数
 
 参数：token，开始时间、结束时间、日期
 
@@ -711,6 +729,7 @@ Request:  http://seat.lib.whu.edu.cn/rest/v2/freeBook?    **token=J8PM1O4QZN1112
 "code": "0"
 }
 ```
+
 #### 五、解决小程序Referer Header的防盗链限制
 
 由于微信小程序、QQ小程序等小程序中，request请求头的Referer是 默认微信/qq指定的内容，导致在访问图书馆服务器的时候，无法通过。
@@ -720,11 +739,13 @@ Request:  http://seat.lib.whu.edu.cn/rest/v2/freeBook?    **token=J8PM1O4QZN1112
 自己服务器不做解析，直接将内容转发回小程序。
 
 具体解决方案：
+
 1. 编写抓包文件说明的url，按照访问图书馆的服务器来书写拼接url
 2. 通过小程序的wx.request向我的服务器45.40.201.185发起请求
 3. 接收请求的网络地址为http://45.40.201.185:8080/WHU/forward(暂时未提供https证书服务)
 4. 由于url为参数时可能包含“&”导致链接参数提取缺失，所以url应通过post方式作为数据发送到上述端口
 5. 例子：
+
 ```
 wx.request({
  url:"http://45.40.201.185:8080/WHU/forward",
@@ -737,8 +758,26 @@ wx.request({
  }
 })
 ```
+
 6. 强调data里面的参数名必须是加引号的"url"，服务器只解析此参数
 
 #### 六、快速预约
 
 图书馆有提供快速自动选座，暂时不以实现。
+
+
+
+#### 七、实际使用中发现使用https系列的请求时，如果请求过于频繁会导致暂时被封号
+
+   但是使用http系列的请求时不会产生该问题，可以考虑中期更换掉请求链接
+
+   或者做成两者结合，关键的部分数据时候http系列的请求
+
+### 八、抓包的后期任务
+
+1. 完善相关的请求链接
+2. 对新功能的链接进行测试
+3. 完善http系列，考虑逐步弃用https系列链接
+
+
+
