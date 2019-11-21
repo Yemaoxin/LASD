@@ -4,10 +4,16 @@ App({
     // =========     onLaunch  获取缓存的数据，若本地无缓存   =========
    //  无缓存将page转移到登录页(index)
     // 有缓存将跳转至首页(state)
-    var logs = wx.getStorageSync('logs') || []
-    var account=wx.getStorageSync('account')||"2017301200273"           //学校图书馆的学号
-    var password=wx.getStorageSync('password')||"227114"         //图书馆登录的密码
-
+    var account=wx.getStorageSync('account')||""           //学校图书馆的学号
+    var password=wx.getStorageSync('password')||""         //图书馆登录的密码
+    //没有信息
+    if(account==""||password=="")
+    {
+      wx.redirectTo({
+        url:"pages/index/index"
+      });
+      return;
+    }
 
     /**
      * TODO 仅做测试是使用
@@ -15,15 +21,12 @@ App({
     wx.setStorageSync("account",account);
     wx.setStorageSync("password",password);
 
-    // 展示本地存储能力
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    })
+    // // 登录
+    // wx.login({
+    //   success: res => {
+    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    //   }
+    // })
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -44,16 +47,6 @@ App({
         }
       }
     })
-
-    //在其他launch逻辑结束后
-    if(account==""||password=="")
-    {
-       wx.redirectTo({
-         url:"pages/index/index"
-       });
-    }      
-
-    
   },
   globalData: {
     //使用存储设置的token能够实现全局共享

@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    account: wx.getStorageSync('account') || "2017301200273",
+    account: wx.getStorageSync('account'),
     token_alert_visible: false,
     logout_visible: false,
     cancel_visible: false,

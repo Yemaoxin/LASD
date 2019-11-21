@@ -1,39 +1,37 @@
-<!--pages/login/login.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
+<!--pages/index/index.wxml-->
+<van-notify id="van-notify" />
+<view     style="text-align: center">
+    <van-image
+            width="330"
+            height="165"
+            fit="cover"
+            src="../../utils/image/login3.jpg"
+    />
+</view>
+<view  style="margin-top: 100rpx">
+<van-cell-group >
+    <van-field
+            required
+            clearable
+            left-icon="contact"
+            label="用户名"
+            autosize
+            placeholder="请输入用户名"
+            bind:blur="setAccount"
+    />
 
-  <view class="login-from">
-    <form bindsubmit="formSubmit" class='form'>
-
-      <view class="username">
-        <view class="weui-cell weui-cell_input">
-          <image class="nameImage" src="/images/username.png"></image>
-          <view class="weui-cell__bd">
-            <input class="weui-input" name="no" bindinput="noinput" value='{{no}}' placeholder="请输入学号" />
-          </view>
-        </view>
-      </view>
-
-      <view class="password">
-        <view class="weui-cell weui-cell_input">
-          <image class="nameImage" src="/images/password.png"></image>
-          <view class="weui-cell__bd">
-            <input class="weui-input" type="password" name="pwd" bindinput="pwdinput" placeholder="请输入密码" value='{{pwd}}'/>
-          </view>
-        </view>
-      </view>
-
-
-      <view class="loginBtnView">
-        <button class="loginBtn" size="{{primarySize}}"  form-type='submit' disabled='{{disabled}}'>登录</button>
-      </view>
-    </form>
-
-  </view>
+    <van-field
+            type="password"
+            label="密码"
+            placeholder="请输入密码"
+            autosize
+            left-icon="closed-eye"
+            required
+            bind:blur="setPassword"
+            border="{{ false }}"
+    />
+</van-cell-group>
+</view>
+<view style="text-align: center;margin-top: 50rpx" >
+    <van-button round type="info" bind:click="login">登录</van-button>
 </view>
