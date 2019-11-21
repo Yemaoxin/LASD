@@ -84,21 +84,21 @@ Page({
           }
           //暂时没有添加错误处理和提示
       });
-      wx.request({
-              url:"https://www.quickbook11.cn:8080/WHU/forward",
-              data:{
-                  "url":"https://seat.lib.whu.edu.cn:8443/rest/v2/room/stats2/1?token="+token
-              },
-              success(res) {
-                  var rooms_t=[];
-                  for(var i=0;i<res.data.data.length;i++)
-                  {
-                      rooms_t.push({text:res.data.data[i].room,value:res.data.data[i].roomId,label2:res.data.data[i].floor,label1:res.data.data[i].free })
-                  }
-                  that.setData({"rooms_p":rooms_t});
+      setTimeout(()=>{
+          wx.request({
+          url:"https://www.quickbook11.cn:8080/WHU/forward",
+          data:{
+              "url":"https://seat.lib.whu.edu.cn:8443/rest/v2/room/stats2/1?token="+token
+          },
+          success(res) {
+              var rooms_t=[];
+              for(var i=0;i<res.data.data.length;i++)
+              {
+                  rooms_t.push({text:res.data.data[i].room,value:res.data.data[i].roomId,label2:res.data.data[i].floor,label1:res.data.data[i].free })
               }
+              that.setData({"rooms_p":rooms_t});
           }
-      );
+      })},500);
 
   },
 
