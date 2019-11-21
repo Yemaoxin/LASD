@@ -1,4 +1,6 @@
 // pages/appointment/appoint.js
+import Notify from '../../dist_diy/notify/notify';
+import Dialog from '../../dist_diy/dialog/dialog';
 Page({
 
   /**
@@ -21,7 +23,14 @@ Page({
       startTime:[{text:"8:00",value:480,label1:-1,label2:-1}],
       endTime:[{text:"8:00",value:480}],
       value_start:480,         //为方便使用默认从8：00开始找
-       value_end:480            //将用于设置url，将用于设置url
+       value_end:480 ,           //将用于设置url，将用于设置url
+      show:false,
+      receiptId:"0",
+      receiptNum:"0",
+      receiptStart:"0",
+      receiptEnd:"0",
+      receiptDate:"0",
+      receiptLoc:"0"
   },
 
   /**
@@ -170,50 +179,82 @@ Page({
             this.setData({"seatId":res.detail});
         },500);
     },
+    /**
+     *  提交座位申请--当没到抢座时间则提交预约，到了时间则直接进行预约
+     * */
     submit:function () {
         console.info("提交");
         var account=wx.getStorageSync("account");
         var password=wx.getStorageSync("password");
         var date=this.data.dates[this.data.date];
-        var url="https://seat.lib.whu.edu.cn:8443/rest/v2/freeBook?startTime="+this.data.value_start+"&endTime="+this.data.value_end+"&seat="+this.data.seatId+"&date="+date;
+        var url="https://seat.lib.whu.edu.cn:8443/rest/v2/freeBook?startTime="+this.data.value_start+"&t=1&t2=2&endTime="+this.data.value_end+"&seat="+this.data.seatId+"&date="+date;
         var today=new Date();
         var hour=today.getHours();
         var minute=today.getMinutes();
         var token=wx.getStorageSync("token");
-        if(hour>22||hour==22&&minute>=45)     //到了抢课时间
+        if(this.data.date==0)                                              //今天可约
         {
-            url=url+"&token="+token;
-            wx.request({
-                url: "http://localhost:8080/WHU/forward",
-                data: {
-                    "url": url
-                },
-                success(res) {
-                    //
-                    //TODO 添加一条提醒预约任务设置成功
-                    //
-                    console.info("直接抢座");
-                }
-            })
+            if(hour<22||hour==22&&minute<45)                //未到明天的抢座时间
+            {
+                url=url+"&token="+token;
+                var that=this;
+                wx.request({
+                    url: "https://www.quickbook11.cn:8080/WHU/POST",
+                    data: {
+                        "url": url
+                    },
+                    success(res) {
+                        //
+                        //TODO 添加抢座失败提示
+                        //
+                       that.setData({'receiptId':res.data.data.id,'receiptNum':res.data.data.receipt,'receiptStart':res.data.data.begin,'receiptEnd':res.data.data.end,'receiptLoc':res.data.data.location,"receiptDate":res.data.data.onDate});
+                       setTimeout(()=>{that.setData({'show':true});},50);
+                    }
+                })
+            }
         }
-        else                                                      //没到抢课时间直接设置定时任务
+        else               //预约选项选择的明天
         {
-            wx.request({
-                url: "http://localhost:8080/FreeBook/Timer",
-                data: {
-                    "url": url,
-                    "account": account,
-                    "password": password
-                },
-                success(res) {
-                    //
-                    //TODO 添加一条提醒预约任务设置成功
-                    //
-                    console.info("成功设置预约任务");
-                }
-            });
+            if(hour>22||hour==22&&minute>=45)     //到了抢课时间
+            {
+                url=url+"&token="+token;
+                wx.request({
+                    url: "https://www.quickbook11.cn:8080/WHU/POST",
+                    data: {
+                        "url": url
+                    },
+                    success(res) {
+                        //ssss
+                        //TODO 添加一条提醒预约任务设置成功
+                        //
+                        that.setData({'receiptId':res.data.data.id,'receiptNum':res.data.data.receipt,'receiptStart':res.data.data.begin,'receiptEnd':res.data.data.end,'receiptLoc':res.data.data.location,"receiptDate":res.data.data.onDate});
+                        setTimeout(()=>{that.setData({'show':true});},50);
+                    }
+                })
+            }
+            else                                                      //没到抢课时间直接设置定时任务
+            {
+                wx.request({
+                    url: "https://www.quickbook11.cn:8080/FreeBook/Timer",
+                    data: {
+                        "url": url,
+                        "account": account,
+                        "password": password
+                    },
+                    success(res) {
+                        //
+                        //TODO 添加一条提醒预约任务设置成功
+                        //
+                        Notify({type:"primary",message:"已提交预约任务"});
+                    }
+                });
+            }
         }
     },
+    /**
+     * 搜索座位--独立出来的座位搜索和提示
+     *
+     * */
     searchSeats:function () {
         var date=this.data.dates[this.data.date];
         var startTime=this.data.value_start;
@@ -224,6 +265,7 @@ Page({
         var that=this;
         //只要是请求的明天，数据会自动更新
         var url="https://seat.lib.whu.edu.cn:8443/rest/v2/searchSeats/"+date+"/"+startTime+"/"+endTime+"?token="+token+"&t=1&t2=2&batch=9999&roomId="+roomId+"&buildingId="+buildingId;
+        wx.showLoading({"title":"加载座位中"});
         wx.request({
             url:"https://www.quickbook11.cn:8080/WHU/POST",
             data:{
@@ -248,17 +290,19 @@ Page({
                     seats_p.push({"text":seats[key].name,"value":seats[key].id,"label1":power,"label2":window});
                 }
                 if(seats_p.length==0)
-                {
+                { Notify({type: 'primary', message: '无可用座位'});
                     seats_p.push({text:"没有可用座位",value:0,label1:-1,label2:-1});
                     that.setData({"seats":seats_p})
                     return;
                 }
                 else {
+                    Notify({type: 'primary', message: '座位加载完成'});
                     seats_p.sort(function (a, b) {
                         return a.text - b.text;                                  //座位从大到小按序排列
                     });
                    that.setData({"seats":seats_p});
                 }
+                wx.hideLoading();
             }
         });
       console.info("搜索")

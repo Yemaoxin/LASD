@@ -9,6 +9,9 @@
     "van-col": "../../dist_diy/col/index",
       "van-button": "../../dist_diy/button/index",
     "i-button": "../../dist/button/index",
-    "van-image": "../../dist_diy/image/index"
+    "van-image": "../../dist_diy/image/index",
+    "van-loading": "../../dist_diy/loading/index",
+    "van-notify": "../../dist_diy/notify/index",
+    "van-dialog": "../../dist_diy/dialog/index"
   }
 }

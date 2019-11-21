@@ -3,6 +3,7 @@
 <!-- 预约界面,通过此处进行定时预约各大场馆的座位 -->
 <!-- created by JH  2019/11/15 -->
 <view >
+    <van-notify id="van-notify" />
     <view     style="text-align: center">
     <van-image
             width="300"
@@ -29,6 +30,25 @@
         <van-col span="12" style="text-align: center" >开始时间</van-col>
         <van-col span="12" style="text-align: center" >结束时间</van-col>
     </van-row>
+
+<!--    弹出提示框-->
+    <van-dialog
+            use-slot
+            title="标题"
+            show="{{ show }}"
+            show-cancel-button
+            show-confirm-button
+            overlay="false"
+    >
+        <van-cell   title="ID：" value="{{ receiptId }}" />
+        <van-cell   title="凭证号：" value="{{ receiptNum }}" />
+        <van-cell   title="日期" value="{{ receiptDate }}" />
+        <van-cell   title="开始时间" value="{{ receiptStart }}" />
+        <van-cell   title="结束时间" value="{{ receiptEnd }}" />
+        <van-cell   title="位置" value="{{ receiptLoc }}" />
+    </van-dialog>
+
+
 <van-dropdown-menu active-color="#ee0a24">
         <van-dropdown-item value="{{ value_start }}"  options="{{ startTime }}" bind:change="changeStartTime" bind:change="changeStartTime"/>
         <van-dropdown-item  value="{{ value_end }}" options="{{ endTime }}" bind:change="changeEndTime"/>
