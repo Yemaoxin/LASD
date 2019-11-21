@@ -58,7 +58,7 @@
 <!--        <van-col span="12" style="text-align: center" ><view >位置</view></van-col>-->
         <van-col span="24">
             <view  style="text-align: center">位置</view>
-            <van-dropdown-menu active-color="#ee0a24">
+            <van-dropdown-menu active-color="#ee0a24" direction="up">
             <van-dropdown-item value="{{ seatId }}"  options="{{ seats }}" bind:change="changeSeat"/>
             </van-dropdown-menu>
         </van-col>
