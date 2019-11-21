@@ -101,7 +101,7 @@ value_r: 0 ,                     //默认信息学部的3C创客空间，将用�
 
 #### 六、界面截图
 
-![img](https://github.com/Yemaoxin/LASD/blob/master/docs/images/P2/12.png)
+![Alt text](https://github.com/Yemaoxin/LASD/blob/master/docs/images/P2/12.png)
 
 
 
