@@ -305,6 +305,7 @@ Page({
                 wx.hideLoading();
             }
         });
+        setTimeout(()=>{wx.hideLoading()},5000);
       console.info("搜索")
     },
 
