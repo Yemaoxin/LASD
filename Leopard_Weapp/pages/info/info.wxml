@@ -1,5 +1,5 @@
 <!--pages/state/state.wxml-->
-
+<van-notify id="van-notify" />
 <i-panel  >
 <view style="padding: 35px;" >    
 <view class="layout_horizontal">

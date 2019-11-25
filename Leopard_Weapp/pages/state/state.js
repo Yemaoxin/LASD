@@ -1,4 +1,5 @@
 // pages/state/state.js
+import Notify from '../../dist_diy/notify/notify';
 Page({
 
   /**
@@ -16,6 +17,7 @@ Page({
     period: "",
     seatId: "",
     reser_data: null,
+      freshTime:"0",
     actions1: [
       {
         name: '取消'
@@ -190,6 +192,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+     this.data.freshTime=new Date();
     //能来到此处即说明已经有帐号了
     var account=wx.getStorageSync("account");
     var password=wx.getStorageSync("password");
@@ -216,10 +219,15 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面显示
+   * 生命周期函数--监听页面显示,当页面从其他地方刷新过来，也会触发刷新
    */
   onShow: function () {
-
+      wx.showLoading({
+          title:"刷新中"
+      });
+      this.refreshPage();
+      this.data.freshTime=new Date();
+      setTimeout(()=>{wx.hideLoading();},500);
   },
 
   /**
@@ -238,9 +246,28 @@ Page({
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
+   * @detail 此处的刷新，很有可能成为一个频繁触发的封号点，必须要做出限制
    */
   onPullDownRefresh: function () {
+      var thisTime=new Date();
+      if(thisTime.getMinutes()==this.data.freshTime.getMinutes()&&((thisTime.getSeconds()-this.data.freshTime.getSeconds())<10))          //如果时间的分钟数一样
+      {
+          wx.stopPullDownRefresh();
+          //限制一分钟内最多刷新6次
+              Notify({
+                  type:"primary",
+                  message:"10秒内刚刷新过，请稍微等等！"
+              });
+              return;
+      }else
+      {this.data.freshTime=thisTime;
+      wx.showLoading({
+          title:"刷新中"
+      });
     this.refreshPage();
+    setTimeout(()=>{wx.hideLoading();},500);
+    wx.stopPullDownRefresh();}
+
   },
 
   /**

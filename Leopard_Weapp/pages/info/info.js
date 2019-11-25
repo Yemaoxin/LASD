@@ -1,3 +1,4 @@
+import Notify from '../../dist_diy/notify/notify';
 Page({
 
   /**
@@ -14,17 +15,18 @@ Page({
     location3: "",
     location4: "",
     location5: "",
+    freshTime:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.data.freshTime=new Date();
     this.getdata();
     wx.showLoading({
       title: '加载中',
-    })
+    });
 
     setTimeout(function () {
       wx.hideLoading()
@@ -94,7 +96,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.data.freshTime=new Date();
+    this.getdata();
   },
 
   /**
@@ -113,9 +116,31 @@ Page({
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
+   * @detail  频繁的刷新会导致服务器检测到数据异常，会被封禁一天
+   *   必须限制刷新次数
    */
   onPullDownRefresh: function () {
-
+    var thisTime=new Date();
+   if(thisTime.getMinutes()==this.data.freshTime.getMinutes()&&(thisTime.getSeconds()-this.data.freshTime.getSeconds()<10))
+   {
+       wx.stopPullDownRefresh();
+       Notify({
+         type:"primary",
+         message:"10秒内刚刷新过，请稍微等等！"
+       })
+     return ;
+   }
+   else
+   {
+     this.data.freshTime=thisTime;
+     wx.showLoading({
+       title:"刷新中"
+     });
+     this.getdata();
+     setTimeout(()=>{
+       wx.hideLoading();
+     },500);
+   }
   },
 
   /**

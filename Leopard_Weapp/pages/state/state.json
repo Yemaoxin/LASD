@@ -10,6 +10,7 @@
     "i-cell-group": "../../dist/cell-group/index",
     "i-cell": "../../dist/cell/index",
     "i-badge": "../../dist/badge/index",
+    "van-notify": "../../dist_diy/notify/index",
     "i-action-sheet": "../../dist/action-sheet/index",
     "i-icon": "../../dist/icon/index",
     "i-modal": "../../dist/modal/index"

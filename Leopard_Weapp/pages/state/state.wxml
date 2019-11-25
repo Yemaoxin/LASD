@@ -1,4 +1,6 @@
+<van-notify id="van-notify" />
 <view  class="userInfo" >
+
 <view class="avatar">
   <open-data type="userAvatarUrl"></open-data>
 </view>

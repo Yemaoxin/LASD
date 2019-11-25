@@ -173,7 +173,10 @@ Page({
         this.setData({"seats":[{"text":"请选择座位","value":0,label1:-1,label2:-1}],"value_end":res.detail,seatId:0});
     },
 
-    //函数：更改座位
+    /**
+     * 函数：更改座位
+     *
+     */
     changeSeat:function (res) {
         setTimeout(()=> {
             this.setData({"seatId":res.detail});
@@ -210,6 +213,12 @@ Page({
                        that.setData({'receiptId':res.data.data.id,'receiptNum':res.data.data.receipt,'receiptStart':res.data.data.begin,'receiptEnd':res.data.data.end,'receiptLoc':res.data.data.location,"receiptDate":res.data.data.onDate});
                        setTimeout(()=>{that.setData({'show':true});},50);
                     }
+                })
+            }
+            else{             //提示换日期
+                Notify({
+                    type:"primary",
+                    message:"请注意选择日期，已经到了预约第二天座位的时间"
                 })
             }
         }
