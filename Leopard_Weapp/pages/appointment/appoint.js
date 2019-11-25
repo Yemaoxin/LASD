@@ -30,7 +30,8 @@ Page({
       receiptStart:"0",
       receiptEnd:"0",
       receiptDate:"0",
-      receiptLoc:"0"
+      receiptLoc:"0",
+      submitTime:0
   },
 
   /**
@@ -186,77 +187,103 @@ Page({
      *  提交座位申请--当没到抢座时间则提交预约，到了时间则直接进行预约
      * */
     submit:function () {
-        console.info("提交");
-        var account=wx.getStorageSync("account");
-        var password=wx.getStorageSync("password");
-        var date=this.data.dates[this.data.date];
-        var url="https://seat.lib.whu.edu.cn:8443/rest/v2/freeBook?startTime="+this.data.value_start+"&t=1&t2=2&endTime="+this.data.value_end+"&seat="+this.data.seatId+"&date="+date;
-        var today=new Date();
-        var hour=today.getHours();
-        var minute=today.getMinutes();
-        var token=wx.getStorageSync("token");
-        if(this.data.date==0)                                              //今天可约
+        var thisTime=new Date();
+        if(this.data.submitTime!=0&&this.data.submitTime.getMinutes()==thisTime.getMinutes()&&(this.data.submitTime.getSeconds()-thisTime.getSeconds())<10)
         {
-            if(hour<22||hour==22&&minute<45)                //未到明天的抢座时间
-            {
-                url=url+"&token="+token;
-                var that=this;
-                wx.request({
-                    url: "https://www.quickbook11.cn:8080/WHU/POST",
-                    data: {
-                        "url": url
-                    },
-                    success(res) {
-                        //
-                        //TODO 添加抢座失败提示
-                        //
-                       that.setData({'receiptId':res.data.data.id,'receiptNum':res.data.data.receipt,'receiptStart':res.data.data.begin,'receiptEnd':res.data.data.end,'receiptLoc':res.data.data.location,"receiptDate":res.data.data.onDate});
-                       setTimeout(()=>{that.setData({'show':true});},50);
-                    }
-                })
-            }
-            else{             //提示换日期
-                Notify({
-                    type:"primary",
-                    message:"请注意选择日期，已经到了预约第二天座位的时间"
-                })
-            }
+                   Notify({
+                       type:"primary",
+                       message:"10秒内刚提交过一次，请稍微等等，避免被封禁！"
+                   })
         }
-        else               //预约选项选择的明天
-        {
-            if(hour>22||hour==22&&minute>=45)     //到了抢课时间
+        else {
+            this.data.submitTime=thisTime;
+            console.info("提交");
+            var account = wx.getStorageSync("account");
+            var password = wx.getStorageSync("password");
+            var date = this.data.dates[this.data.date];
+            var url = "https://seat.lib.whu.edu.cn:8443/rest/v2/freeBook?startTime=" + this.data.value_start + "&t=1&t2=2&endTime=" + this.data.value_end + "&seat=" + this.data.seatId + "&date=" + date;
+            var today = new Date();
+            var hour = today.getHours();
+            var minute = today.getMinutes();
+            var token = wx.getStorageSync("token");
+            if (this.data.date == 0)                                              //今天可约
             {
-                url=url+"&token="+token;
-                wx.request({
-                    url: "https://www.quickbook11.cn:8080/WHU/POST",
-                    data: {
-                        "url": url
-                    },
-                    success(res) {
-                        //ssss
-                        //TODO 添加一条提醒预约任务设置成功
-                        //
-                        that.setData({'receiptId':res.data.data.id,'receiptNum':res.data.data.receipt,'receiptStart':res.data.data.begin,'receiptEnd':res.data.data.end,'receiptLoc':res.data.data.location,"receiptDate":res.data.data.onDate});
-                        setTimeout(()=>{that.setData({'show':true});},50);
-                    }
-                })
-            }
-            else                                                      //没到抢课时间直接设置定时任务
+                if (hour < 22 || hour == 22 && minute < 45)                //未到明天的抢座时间
+                {
+                    url = url + "&token=" + token;
+                    var that = this;
+                    wx.request({
+                        url: "https://www.quickbook11.cn:8080/WHU/POST",
+                        data: {
+                            "url": url
+                        },
+                        success(res) {
+                            //
+                            //TODO 添加抢座失败提示
+                            //
+                            that.setData({
+                                'receiptId': res.data.data.id,
+                                'receiptNum': res.data.data.receipt,
+                                'receiptStart': res.data.data.begin,
+                                'receiptEnd': res.data.data.end,
+                                'receiptLoc': res.data.data.location,
+                                "receiptDate": res.data.data.onDate
+                            });
+                            setTimeout(() => {
+                                that.setData({'show': true});
+                            }, 50);
+                        }
+                    })
+                } else {             //提示换日期
+                    Notify({
+                        type: "primary",
+                        message: "请注意选择日期，已经到了预约第二天座位的时间"
+                    })
+                }
+            } else               //预约选项选择的明天
             {
-                wx.request({
-                    url: "https://www.quickbook11.cn:8080/FreeBook/Timer",
-                    data: {
-                        "url": url,
-                        "account": account,
-                        "password": password
-                    },
-                    success(res) {
-                        //
-                        //TODO 添加一条提醒预约任务设置成功
-                        //
-                        Notify({type:"primary",message:"已提交预约任务"});
-                    }
-                });
+                if (hour > 22 || hour == 22 && minute >= 45)     //到了抢课时间
+                {
+                    url = url + "&token=" + token;
+                    wx.request({
+                        url: "https://www.quickbook11.cn:8080/WHU/POST",
+                        data: {
+                            "url": url
+                        },
+                        success(res) {
+                            //ssss
+                            //TODO 添加一条提醒预约任务设置成功
+                            //
+                            that.setData({
+                                'receiptId': res.data.data.id,
+                                'receiptNum': res.data.data.receipt,
+                                'receiptStart': res.data.data.begin,
+                                'receiptEnd': res.data.data.end,
+                                'receiptLoc': res.data.data.location,
+                                "receiptDate": res.data.data.onDate
+                            });
+                            setTimeout(() => {
+                                that.setData({'show': true});
+                            }, 50);
+                        }
+                    })
+                } else                                                      //没到抢课时间直接设置定时任务
+                {
+                    wx.request({
+                        url: "https://www.quickbook11.cn:8080/FreeBook/Timer",
+                        data: {
+                            "url": url,
+                            "account": account,
+                            "password": password
+                        },
+                        success(res) {
+                            //
+                            //TODO 添加一条提醒预约任务设置成功
+                            //
+                            Notify({type: "primary", message: "已提交预约任务"});
+                        }
+                    });
+                }
             }
         }
     },
