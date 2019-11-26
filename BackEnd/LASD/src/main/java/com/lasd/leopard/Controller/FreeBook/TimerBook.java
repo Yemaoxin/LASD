@@ -23,22 +23,22 @@ public class TimerBook {
     /**
      * 设置定时任务
      * 定时向武大服务器发起请求
-     * 考虑时间因素可以设置定时在22：45：01
+     * 考虑时间因素可以设置定时在22：45：00
      * */
 
     @Autowired
     private ThreadPoolTaskScheduler threadPoolTaskScheduler;
     @ResponseBody
     @RequestMapping("/Timer")
-    public String Timer(String url,String account,String password)
+    public String Timer(String url,String account,String password,String optionsUrl)
     {
           Calendar today = DateUtils.createToday();
           //表达式中星期不做设定，设定好秒、分、时、日期、月份、年
-        String cron="0 45 22 "+today.get(Calendar.DATE)+" "+(today.get(Calendar.MONTH)+1)+" ? "+today.get(Calendar.YEAR);
+        String cron="0 45 22 "+today.get(Calendar.DATE)+" "+(today.get(Calendar.MONTH)+1)+" ?";
         TimerBookRun run=new TimerBookRun(url,account,password);
         CronTrigger triger=new CronTrigger(cron);
         threadPoolTaskScheduler.schedule(run,triger);
-        System.out.println("设置定时任务");
+        System.out.println("设置定时任务"+cron);
         return "OK";
     }
 }
