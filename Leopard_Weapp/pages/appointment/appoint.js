@@ -31,7 +31,8 @@ Page({
       receiptEnd:"0",
       receiptDate:"0",
       receiptLoc:"0",
-      submitTime:0
+      submitTime:0,
+      freshTime:0
   },
 
   /**
@@ -368,9 +369,26 @@ Page({
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
+     * 当用户没能成功加载出信息可以进行刷新
      */
     onPullDownRefresh: function () {
-
+        var thisTime=new Date();
+        if(this.data.freshTime!=0&&this.data.freshTime.getMinutes()==thisTime.getMinutes()&&(thisTime.getSeconds()-this.data.freshTime.getSeconds())<10)
+        {
+            Notify({
+                type:"primary",
+                message:"10秒内刚刷新,请稍微等等！"
+            });
+            wx.stopPullDownRefresh();
+        }else {
+            this.data.freshTime=thisTime;
+            this.onReady();
+            Notify({
+                type: "primary",
+                message: "刷新成功"
+            });
+            wx.stopPullDownRefresh();
+        }
     },
 
     /**
