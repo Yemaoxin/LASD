@@ -32,7 +32,8 @@ Page({
       receiptDate:"0",
       receiptLoc:"0",
       submitTime:0,
-      freshTime:0
+      freshTime:0,
+      optionsSeatId:0                           //备选位置
   },
 
   /**
@@ -222,6 +223,27 @@ Page({
                             //
                             //TODO 添加抢座失败提示
                             //
+                            if(res.data.data==null||res.data.data.id==null)
+                            {
+                                if(that.data.optionsSeatId!=0) {
+                                    url = "https://seat.lib.whu.edu.cn:8443/rest/v2/freeBook?startTime=" + that.data.value_start + "&t=1&t2=2&endTime=" + that.data.value_end + "&seat=" + that.data.optionsSeatId + "&date=" + date;
+                                    wx.request({
+                                        url: "https://www.quickbook11.cn:8080/WHU/POST",
+                                        data: {
+                                            "url": url
+                                        },
+                                        success(resource) {
+                                            if(resource.data.data==null||resource.data.data.id==null)
+                                            {
+                                                Notify({
+                                                    type:"primary",
+                                                    message:"抢座失败"
+                                                })
+                                            }
+                                        }
+                                    })
+                                }
+                            }
                             that.setData({
                                 'receiptId': res.data.data.id,
                                 'receiptNum': res.data.data.receipt,
@@ -403,6 +425,14 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+    /**
+     *改变备选位置
+     */
+    changeOptionsSeat:function (res) {
+        setTimeout(()=> {
+            this.setData({"optionsSeatId":res.detail});
+        },500);
     }
 
 })

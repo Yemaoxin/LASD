@@ -34,7 +34,7 @@
 <!--    弹出提示框-->
     <van-dialog
             use-slot
-            title="标题"
+            title="预约凭证"
             show="{{ show }}"
             show-cancel-button
             show-confirm-button
@@ -56,10 +56,16 @@
 <i-button bind:click="handleClick" bind:click="searchSeats">搜索可用位置</i-button>
     <van-row>
 <!--        <van-col span="12" style="text-align: center" ><view >位置</view></van-col>-->
-        <van-col span="24">
+        <van-col span="12">
             <view  style="text-align: center">位置</view>
             <van-dropdown-menu active-color="#ee0a24" direction="up">
             <van-dropdown-item value="{{ seatId }}"  options="{{ seats }}" bind:change="changeSeat"/>
+            </van-dropdown-menu>
+        </van-col>
+        <van-col span="12">
+            <view  style="text-align: center">备选位置（非必填）</view>
+            <van-dropdown-menu active-color="#ee0a24" direction="up">
+                <van-dropdown-item value="{{ optionsSeatId }}"  options="{{ seats }}" bind:change="changeOptionsSeat"/>
             </van-dropdown-menu>
         </van-col>
     </van-row>
