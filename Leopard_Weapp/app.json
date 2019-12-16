@@ -19,20 +19,20 @@
       {
         "pagePath": "pages/state/state",
         "text": "首页",
-        "iconPath": "utils/icon/home.png",
-        "selectedIconPath":"utils/icon/home1.png"
+        "iconPath": "utils/icon_tab/home.png",
+        "selectedIconPath":"utils/icon_tab/home1.png"
       },
       {
         "pagePath": "pages/appointment/appoint",
         "text": "预约",
-        "iconPath": "utils/icon/seat.png",
-        "selectedIconPath":"utils/icon/seat1.png"
+        "iconPath": "utils/icon_tab/seat.png",
+        "selectedIconPath":"utils/icon_tab/seat1.png"
       },
       {
         "pagePath": "pages/info/info",
         "text": "我的",
-        "iconPath": "utils/icon/myInfo.png",
-        "selectedIconPath":"utils/icon/myInfo1.png"
+        "iconPath": "utils/icon_tab/myInfo.png",
+        "selectedIconPath":"utils/icon_tab/myInfo1.png"
       }
     ]
   }
