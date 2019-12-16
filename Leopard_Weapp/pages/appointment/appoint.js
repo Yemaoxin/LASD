@@ -342,15 +342,19 @@ Page({
         var that=this;
         //只要是请求的明天，数据会自动更新
         var url="https://seat.lib.whu.edu.cn:8443/rest/v2/searchSeats/"+date+"/"+startTime+"/"+endTime+"?token="+token+"&t=1&t2=2&batch=9999&roomId="+roomId+"&buildingId="+buildingId;
+
         wx.showLoading({"title":"加载座位中"});
+
         wx.request({
             url:"https://www.quickbook11.cn:8080/WHU/POST",
             data:{
                 "url":url
             },
             method:"GET",
+
             success(res) {
                 var seats=res.data.data.seats;
+
                 var seats_p=[];                               //seats不是一个数组形式的值，而是一个实体对象，需要通过foreach的形式获取键值
                 for(var key in seats)
                 {
@@ -367,12 +371,16 @@ Page({
                     seats_p.push({"text":seats[key].name,"value":seats[key].id,"label1":power,"label2":window});
                 }
                 if(seats_p.length==0)
-                { Notify({type: 'primary', message: '无可用座位'});
+                {
+                    //弹出通知（界面上方蓝色通知栏），告知无可用座位
+                    Notify({type: 'primary', message: '无可用座位'});
                     seats_p.push({text:"没有可用座位",value:0,label1:-1,label2:-1});
+                    //更新数据，设置渲染
                     that.setData({"seats":seats_p})
                     return;
                 }
                 else {
+                    //弹出通知（界面上方蓝色通知栏），告知座位加载完毕
                     Notify({type: 'primary', message: '座位加载完成'});
                     seats_p.sort(function (a, b) {
                         return a.text - b.text;                                  //座位从大到小按序排列
