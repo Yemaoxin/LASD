@@ -45,18 +45,7 @@
 <i-button bind:click="stopUsing"  shape="circle"  type="primary" size="large">结束使用</i-button>
 <i-button bind:click="logOut"  type="warning" shape="circle" size="large">注销帐号
 </i-button>
-
-    <i-button type="success" shape="square" size="large" bind:click="cancelReserve">
-        取消预约
-    </i-button>
-
-    <i-button bind:click="stopUsing"  shape="square"  type="primary" size="large">
-        结束使用
-    </i-button>
     
-    <i-button bind:click="logOut"  type="warning" shape="square" size="large">
-        注销帐号
-    </i-button>
 
 </view>
 
