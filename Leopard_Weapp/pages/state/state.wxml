@@ -1,43 +1,55 @@
 <van-notify id="van-notify" />
-<view  class="userInfo" >
 
-<view class="avatar">
-  <open-data type="userAvatarUrl"></open-data>
-</view>
+<view  class="userInfo" >
+    <view class="avatar">
+        <open-data type="userAvatarUrl"></open-data>
+    </view>
     <open-data type="userNickName"></open-data>
 </view>
 
 
 <view class="infoList">
-<i-cell-group>
-    <i-cell title="学号" value="{{account}}">
-    <i-icon slot="icon" type="mine_fill" size="28" />
-    </i-cell>
-    <i-cell title="姓名" value="{{name}}">
-    <i-icon slot="icon" type="mine" size="28" />
-    </i-cell>
-    <i-cell title="当前预约" value="{{locations}}">
-    <i-icon slot="icon" type="homepage" size="28" />
-    </i-cell>
-    <i-cell title="日期" value="{{onDate}}" >
-    <i-icon slot="icon" type="createtask" size="28" />
-    </i-cell>
-    <i-cell title="起始/终止时间" value="{{period}}">
-    <i-icon slot="icon" type="clock" size="28" />
-    </i-cell>
-    <i-cell title="签到情况" value="{{checkedIn}}">
-    <i-icon slot="icon" type="flag" size="28" />
-    </i-cell>
-    
-</i-cell-group>
+    <i-cell-group>
+
+        <i-cell title="学号" value="{{account}}">
+            <i-icon slot="icon" type="mine_fill" size="28" />
+        </i-cell>
+
+        <i-cell title="姓名" value="{{name}}">
+            <i-icon slot="icon" type="mine" size="28" />
+        </i-cell>
+
+        <i-cell title="当前预约" value="{{locations}}">
+            <i-icon slot="icon" type="homepage" size="28" />
+        </i-cell>
+
+        <i-cell title="日期" value="{{onDate}}" >
+            <i-icon slot="icon" type="createtask" size="28" />
+        </i-cell>
+
+        <i-cell title="起始/终止时间" value="{{period}}">
+            <i-icon slot="icon" type="clock" size="28" />
+        </i-cell>
+
+        <i-cell title="签到情况" value="{{checkedIn}}">
+            <i-icon slot="icon" type="flag" size="28" />
+        </i-cell>
+        
+    </i-cell-group>
 </view>
 
 <view style="margin-top:30rpx">
-<i-button type="success" shape="square" size="large" bind:click="cancelReserve">取消预约
-</i-button>
-<i-button bind:click="stopUsing"  shape="square"  type="primary" size="large">结束使用</i-button>
-<i-button bind:click="logOut"  type="warning" shape="square" size="large">注销帐号
-</i-button>
+    <i-button type="success" shape="square" size="large" bind:click="cancelReserve">
+        取消预约
+    </i-button>
+
+    <i-button bind:click="stopUsing"  shape="square"  type="primary" size="large">
+        结束使用
+    </i-button>
+    
+    <i-button bind:click="logOut"  type="warning" shape="square" size="large">
+        注销帐号
+    </i-button>
 </view>
 
 <i-modal visible="{{token_alert_visible}}" bind:ok="token_alert_handle" bind:cancel="token_alert_handle">
