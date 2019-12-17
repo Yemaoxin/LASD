@@ -1,7 +1,7 @@
 <!--pages/state/state.wxml-->
 <van-notify id="van-notify" />
 <i-panel  >
-<view style="padding: 35px;" >    
+<view style="padding: 35px;" >
 <view class="layout_horizontal">
 <view class="userinfo-avatar1">
 <open-data  type="userAvatarUrl"></open-data>
@@ -11,12 +11,12 @@
 
 <i-button  bind:click="handleClick">
 <open-data type="userNickName"></open-data>
-</i-button> 
+</i-button>
 </view>
 <!-- <view class="distance">
 <i-button type="primary" bind:click="handleClick">
 {{username}} {{userid}}
-</i-button> 
+</i-button>
 </view> -->
 </view>
 </i-panel>
@@ -77,7 +77,7 @@
 <text class="text2">切换用户</text> -->
 <view class="flex-row" style="display: block;">
 
- 
+
   <view class="flex-view-item">
 
   </view>
@@ -87,7 +87,7 @@
 <!-- <i-icon size="35" type="addressbook_fill" /> -->
 <!-- <text class="text2">切换用户</text> -->
 </i-cell>
- 
+
 </i-cell-group>
 
 
