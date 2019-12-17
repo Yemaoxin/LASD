@@ -1,1 +1,37 @@
-<!--更新-->
+<!--pages/index/index.wxml-->
+<van-notify id="van-notify" />
+<view     style="text-align: center">
+    <van-image
+            width="330"
+            height="165"
+            fit="cover"
+            src="../../utils/image/login3.jpg"
+    />
+</view>
+<view  style="margin-top: 100rpx">
+<van-cell-group >
+    <van-field
+            required
+            clearable
+            left-icon="contact"
+            label="用户名"
+            autosize
+            placeholder="请输入用户名"
+            bind:blur="setAccount"
+    />
+
+    <van-field
+            type="password"
+            label="密码"
+            placeholder="请输入密码"
+            autosize
+            left-icon="closed-eye"
+            required
+            bind:blur="setPassword"
+            border="{{ false }}"
+    />
+</van-cell-group>
+</view>
+<view style="text-align: center;margin-top: 50rpx" >
+    <van-button round type="info" bind:click="login">登录</van-button>
+</view>
