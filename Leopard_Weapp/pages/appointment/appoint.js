@@ -1,4 +1,5 @@
 // pages/appointment/appoint.js
+//Created by JH
 import Notify from '../../dist_diy/notify/notify';
 import Dialog from '../../dist_diy/dialog/dialog';
 Page({
