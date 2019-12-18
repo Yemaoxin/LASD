@@ -3,7 +3,7 @@
     "van-field": "../../dist_diy/field/index",
     "van-cell-group": "../../dist_diy/cell-group/index",
     "van-button": "../../dist_diy/button/index",
-    "van-image": "../../dist_diy/image/index",
-    "van-notify": "../../dist_diy/notify/index"
+    "van-image": "../../dist_diy/image/index"
+    
   }
 }

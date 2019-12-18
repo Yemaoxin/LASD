@@ -39,17 +39,13 @@
 </view>
 
 <view style="margin-top:30rpx">
-    <i-button type="success" shape="square" size="large" bind:click="cancelReserve">
-        取消预约
-    </i-button>
 
-    <i-button bind:click="stopUsing"  shape="square"  type="primary" size="large">
-        结束使用
-    </i-button>
-    
-    <i-button bind:click="logOut"  type="warning" shape="square" size="large">
-        注销帐号
-    </i-button>
+<i-button type="success" shape="circle" size="large" bind:click="cancelReserve">取消预约
+</i-button>
+<i-button bind:click="stopUsing"  shape="circle"  type="primary" size="large">结束使用</i-button>
+<i-button bind:click="logOut"  type="warning" shape="circle" size="large">注销帐号
+</i-button>
+
 </view>
 
 <i-modal visible="{{token_alert_visible}}" bind:ok="token_alert_handle" bind:cancel="token_alert_handle">

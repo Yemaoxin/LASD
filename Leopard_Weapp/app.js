@@ -21,12 +21,6 @@ App({
     wx.setStorageSync("account",account);
     wx.setStorageSync("password",password);
 
-    // // 登录
-    // wx.login({
-    //   success: res => {
-    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
-    //   }
-    // })
     // 获取用户信息
     wx.getSetting({
       success: res => {

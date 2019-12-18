@@ -32,6 +32,15 @@
     </van-row>
 
 <!--    弹出提示框-->
+<!--    提供预约凭证的具体内容
+         用于预约成功时的告知
+         具体需要预约凭证ID
+                       凭证号
+                       日期
+                       开始时间
+                       结束时间
+                       位置
+-->
     <van-dialog
             use-slot
             title="预约凭证"
@@ -53,7 +62,7 @@
         <van-dropdown-item value="{{ value_start }}"  options="{{ startTime }}" bind:change="changeStartTime" bind:change="changeStartTime"/>
         <van-dropdown-item  value="{{ value_end }}" options="{{ endTime }}" bind:change="changeEndTime"/>
 </van-dropdown-menu>
-<i-button bind:click="handleClick" bind:click="searchSeats">搜索可用位置</i-button>
+<i-button bind:click="handleClick" bind:click="searchSeats" shape="circle">搜索可用位置</i-button>
     <van-row>
 <!--        <van-col span="12" style="text-align: center" ><view >位置</view></van-col>-->
         <van-col span="12">
@@ -69,5 +78,5 @@
             </van-dropdown-menu>
         </van-col>
     </van-row>
-    <i-button bind:click="handleClick" bind:click="submit">确认预约</i-button>
+    <i-button bind:click="handleClick" bind:click="submit" shape="circle">确认预约</i-button>
 </view>
