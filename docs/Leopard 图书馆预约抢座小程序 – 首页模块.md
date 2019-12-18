@@ -53,12 +53,12 @@
     {
     	"status": "success",
     	"data": {
-    		"id": 138911,        // 用户的id，这个应该是一个比较特殊的暂时没看出来用处
+    		"id": 138911,        
     		"enabled": true,                 
-    		"name": "{用户姓名}",                   // 用户名
-    		"username": "{用户学号}",       // 学号
+    		"name": "{用户姓名}",                   
+    		"username": "{用户学号}",       
     		"username2": null,
-    		"status": "NORMAL",               // 检测用户状态的变量，如果存在非法的多次请求，短时间内将被封禁使用权限，同时发现自习助手的一侧的数据仍然可以正常使用，考虑中期更换请求链接          
+    		"status": "NORMAL",                         
     		"lastLogin": "2019-11-12T14:29:42.000",                 
     		"checkedIn": false,
     		"reservationStatus": null,
@@ -66,7 +66,7 @@
     		"lastOut": null,
     		"lastInBuildingId": null,
     		"lastInBuildingName": null,
-    		"violationCount": 7                           // 违约次数，早退违约、迟到违约等。
+    		"violationCount": 7                           
     	},
     	"message": "",
     	"code": "0"
@@ -103,19 +103,19 @@
     {
         "status": "success",
         "data": [{
-            "id": 8046397,              // 忽略
+            "id": 8046397,              
             "receipt": "0006-397-2", 
-            "onDate": "2019-11-12",      // 日期
+            "onDate": "2019-11-12",      
             "seatId": 2511,       
-            "status": "RESERVE",           // RESERVE预约成功保留中，INUSE使用中等等
-            "location": "信息馆1层西区3C创客空间，座位号012",       // 地点
-            "begin": "20:00",                   // 开始时间
-            "end": "22:30",                 // 结束时间
+            "status": "RESERVE",           
+            "location": "信息馆1层西区3C创客空间，座位号012",      
+            "begin": "20:00",                   
+            "end": "22:30",                 
             "actualBegin": null,
             "awayBegin": null,
             "awayEnd": null,
             "userEnded": false,
-            "message": "请在 11月12日19点45分 至 20点35分 之间前往场馆签到"     // 签到信息
+            "message": "请在 11月12日19点45分 至 20点35分 之间前往场馆签到"    
         }],
         "message": "",
         "code": "0"
@@ -220,6 +220,7 @@
    - 取消尚未签到的预约。
 2. 存在的问题
    - 操作过于频繁会导致封号。
+   - 界面风格需美化。
 
 
 
@@ -227,5 +228,5 @@
 
 界面截图如下：
 
-<img src="images/P1/state.jpg" alt="state" style="zoom:50%;" />
+<img src="images/P1/state.jpg" alt="state" style="zoom:25%;" />
 
