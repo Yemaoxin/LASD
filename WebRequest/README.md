@@ -709,6 +709,8 @@ Request:  http://seat.lib.whu.edu.cn/rest/v2/freeBook?    **token=J8PM1O4QZN1112
 
 //抢座软件一侧是还需要**t=1&t2=2**的请求参数
 
+提交方式：post
+
 参数：token，开始时间、结束时间、日期
 
 返回该预约单的信息。
