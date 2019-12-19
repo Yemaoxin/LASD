@@ -83,7 +83,7 @@
 
 ### 5.小程序体验尝鲜版--Leopard 图书馆抢座小程序
 
-![](docs/images/P3/test.png)
+![](docs/images/P3/test.jpg)
 
 目前小程序正在接收审核，想提前打开体验的同学可以扫码申请体验名额，名额有限。
 
