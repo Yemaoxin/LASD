@@ -90,7 +90,7 @@
 
 ##### 1.2 页面设计
 
-![](docs\images\P3\xmz\5.jpg)
+![](images\P3\xmz\5.jpg)
 
 上图为迭代后的小程序截图效果。
 
