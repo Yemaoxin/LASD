@@ -104,7 +104,7 @@
 
 **座位信息细节**：提示是否有电源和窗户
 
-![6](docs\images\P3\xmz\6.jpg)
+![6](images\P3\xmz\6.jpg)
 
 
 
@@ -112,11 +112,11 @@
 
 
 
-![3](docs\images\P3\xmz\3.jpg)
+![3](images\P3\xmz\3.jpg)
 
 
 
 **时间细节**：从8点开始的，每半小时为单位
 
-![4](docs\images\P3\xmz\4.jpg)
+![4](images\P3\xmz\4.jpg)
 
