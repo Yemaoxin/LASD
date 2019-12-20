@@ -18,6 +18,7 @@
     "i-tag": "../../dist/tag/index",
     "i-panel": "../../dist/panel/index",
     "i-steps": "../../dist/steps/index",
-    "i-step": "../../dist/step/index"
+    "i-step": "../../dist/step/index",
+    "i-card": "../../dist/card/index"
   }
 }

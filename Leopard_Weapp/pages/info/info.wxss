@@ -120,6 +120,69 @@
   flex-direction: row;
 }
 
+.text2{
+height:100rpx;
+display:flex;
+flex-direction:row;
+margin:30rpx
+color:#0000ff
+
+
+}
+
+.distance1
+{
+  width: 20rpx;
+  height: 100rpx;
+  margin: 188rpx;
+  margin-top: 30rpx;
+}
+.distance3
+{
+  width: 30rpx;
+  height: 100rpx;
+  margin: 188rpx;
+  margin-top: 30rpx;
+}
+.distance4
+{
+  width: 40rpx;
+  height: 100rpx;
+  margin: 188rpx;
+  margin-top: 30rpx;
+}
+.distance5
+{
+  width: 50rpx;
+  height: 100rpx;
+  margin: 188rpx;
+  margin-top: 30rpx;
+}
+.distance6
+{
+  width: 60rpx;
+  height: 100rpx;
+  margin: 188rpx;
+  margin-top: 30rpx;
+}
+.distance7
+{
+  width: 70rpx;
+  height: 100rpx;
+  margin: 188rpx;
+  margin-top: 30rpx;
+}
+.distance8
+{
+  width: 80rpx;
+  height: 100rpx;
+  margin: 188rpx;
+  margin-top: 30rpx;
+}
+
+
+
+
 
 
 
