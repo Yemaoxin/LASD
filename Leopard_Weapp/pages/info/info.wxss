@@ -120,7 +120,15 @@
   flex-direction: row;
 }
 
+.text2{
+height:100rpx;
+display:flex;
+flex-direction:row;
+margin:30rpx
+color:#0000ff
 
+
+}
 
 
 
