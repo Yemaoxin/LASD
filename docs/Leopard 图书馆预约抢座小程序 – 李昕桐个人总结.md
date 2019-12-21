@@ -228,5 +228,5 @@
 
 界面截图如下：
 
-<img src="images/P1/state.jpg" alt="state" style="zoom:25%;" />
+[如图](https://github.com/Yemaoxin/LASD/blob/master/docs/images/P1/state.jpg)
 
